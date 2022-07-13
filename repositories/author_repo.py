@@ -10,3 +10,43 @@ def save(author):
     id = results[0]['id']
     author.id = id
     return author
+
+def delete_all():
+    sql = "DELETE FROM authors"
+    run_sql(sql)
+
+def select_by_id(id):
+    author = None
+    sql = "SELECT * FROM authors WHERE ID = %s"
+    values = [id]
+    results = run_sql(sql, values)[0]
+
+    if results is not None:
+
+        author = Author(results["name"], results["id"])
+    return author
+
+
+
+    
+
+def select_all():
+    authors = []
+
+    sql = "SELECT * FROM authors"
+    results = run_sql(sql)
+
+    for row in results:
+        author = Author(row["name"], row["id"])
+        authors.append(author)
+    return authors
+
+def update(author):
+    sql = " UPDATE authors SET name = %s Where id = %s"
+    values = [author.name, author.id]
+    run_sql(sql, values)
+
+def delete_id(id):
+    sql = "DELETE FROM authors WHERE id = %s"
+    values = [id]
+    run_sql(sql, values)

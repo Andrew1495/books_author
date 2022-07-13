@@ -1,5 +1,16 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    stuff also here
+    <Ul>
+        {% for book in all_books %}
+        <li>
+            {{ book.title }}
+            {{ book.genre }}
+            {{ book.author.name }}
+            <form action="/books/{{ book.id }}/delete" method="post">
+                <button type="submit">Del</button>
+            </form>
+        </li>
+        {% endfor %}
+    </Ul>
 {% endblock content %}
